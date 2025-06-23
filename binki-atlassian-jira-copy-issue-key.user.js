@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name     binki-atlassian-jira-copy-issue-key
+// @name binki-atlassian-jira-copy-issue-key
 // @homepageURL https://github.com/binki/binki-atlassian-jira-copy-issue-key
-// @version  1.0.0
+// @version 1.0.0
 // @match https://*.atlassian.net/*
 // @require https://github.com/binki/binki-userscript-when-element-changed-async/raw/88cf57674ab8fcaa0e86bdf5209342ec7780739a/binki-userscript-when-element-changed-async.js
 // ==/UserScript==
