@@ -17,11 +17,19 @@
     setTimeout(() => button.disabled = false, 1000);
   });
 
+  let lastSeenInsertionPoint;
   while (true) {
     await whenElementChangedAsync(document.body);
     const keyPermalinkButton = document.querySelector('[data-testid="issue.common.component.permalink-button.button.copy-link-button-wrapper"] button');
     if (!keyPermalinkButton) continue;
-    button.className = keyPermalinkButton.className;
-    keyPermalinkButton.parentElement.parentElement.append(button);
+    // Be certain NOT to append this if it is already there. If multiple scripts (e.g., binki-atlassian-jira-copy-issue-key)
+    // do this, then any append which result in a DOM mutation happening will retrigger our change detection, creating an
+    // infinite loop and rendering the browser nonresponsive.
+    const insertionPoint = keyPermalinkButton.parentElement.parentElement;
+    if (insertionPoint !== lastSeenInsertionPoint) {
+      lastSeenInsertionPoint = insertionPoint;
+      button.className = keyPermalinkButton.className;
+      insertionPoint.append(button);
+    }
   }
 })();
