@@ -23,7 +23,7 @@
   const getTestId = element => {
     while (element) {
       if (element.dataset.testid) return element.dataset.testid;
-      element = element.firstChild;
+      element = element.firstElementChild;
     }
   };
   let lastSeenInsertionParent;
@@ -40,7 +40,7 @@
       button.className = keyPermalinkButton.className;
       // Implement https://github.com/binki/binki-atlassian-jira-copy-issue-key/issues/2
       let next = insertionParent.firstChild;
-      while (next && (!getTestId(next) || getTestId(next) < getTestId(span))) next = next.nextSibling;
+      while (next && (!getTestId(next) || getTestId(next) < getTestId(span))) next = next.nextElementSibling;
       insertionParent.insertBefore(span, next);
     }
   }
